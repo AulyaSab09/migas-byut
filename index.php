@@ -36,6 +36,26 @@ include __DIR__ . '/includes/header.php';
     $statusBg = $isLayak ? '#EAF8ED' : '#FFF4DA';
     $statusColor = $isLayak ? '#3F8F4D' : '#7A5A1E';
     $statusIconBg = $isLayak ? '#DFF3E4' : '#FFF0C2';
+    $totalPendapatanRupiah = $summary['total_income'] * 1000000 * $kurs;
+    $formatRupiahSingkat = function ($angka) {
+        if ($angka >= 1000000000000000) {
+            return 'Rp ' . number_format($angka / 1000000000000, 2, ',', '.') . ' T';
+        }
+
+        if ($angka >= 1000000000000) {
+            return 'Rp ' . number_format($angka / 1000000000000, 2, ',', '.') . ' T';
+        }
+
+        if ($angka >= 1000000000) {
+            return 'Rp ' . number_format($angka / 1000000000, 2, ',', '.') . ' M';
+        }
+
+        if ($angka >= 1000000) {
+            return 'Rp ' . number_format($angka / 1000000, 2, ',', '.') . ' Juta';
+        }
+
+        return format_rupiah($angka);
+    };
 ?>
 <div class="space-y-5 lg:space-y-6 min-w-0">
     <div class="app-card rounded-[26px] sm:rounded-[28px] p-5 sm:p-6 relative overflow-hidden min-w-0">
@@ -61,7 +81,7 @@ include __DIR__ . '/includes/header.php';
             <div class="flex items-start justify-between gap-3 min-w-0">
                 <div class="min-w-0">
                     <div class="text-sm font-semibold" style="color: var(--color-muted);">Total Produksi</div>
-                    <div class="kpi-value font-bold mt-1" style="color: var(--color-heading);"><?= format_number($summary['total_produksi']) ?> Mbbl</div>
+                    <div class="text-lg sm:text-xl xl:text-2xl font-bold mt-1 leading-tight" style="color: var(--color-heading);"><?= format_number($summary['total_produksi']) ?> Mbbl</div>
                 </div>
                 <div class="icon-box">
                     <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 20V6.5A2.5 2.5 0 0 1 10.5 4h3A2.5 2.5 0 0 1 16 6.5V20"/><path d="M6 20h12"/><path d="M10 8h4"/><path d="M10 12h4"/></svg>
@@ -72,7 +92,7 @@ include __DIR__ . '/includes/header.php';
             <div class="flex items-start justify-between gap-3 min-w-0">
                 <div class="min-w-0">
                     <div class="text-sm font-semibold" style="color: var(--color-muted);">Total Pendapatan USD</div>
-                    <div class="kpi-value font-bold mt-1" style="color: var(--color-heading);"><?= format_usd_m($summary['total_income']) ?></div>
+                    <div class="text-lg sm:text-xl xl:text-2xl font-bold mt-1 leading-tight" style="color: var(--color-heading);"><?= format_usd_m($summary['total_income']) ?></div>
                 </div>
                 <div class="icon-box" style="background: #FFF8E6; color: #D88912;">
                     <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -83,7 +103,7 @@ include __DIR__ . '/includes/header.php';
             <div class="flex items-start justify-between gap-3 min-w-0">
                 <div class="min-w-0">
                     <div class="text-sm font-semibold" style="color: var(--color-muted);">Total Pendapatan Rupiah</div>
-                    <div class="kpi-value font-bold mt-1" style="color: var(--color-heading);"><?= format_rupiah($summary['total_income'] * 1000000 * $kurs) ?></div>
+                    <div class="text-lg sm:text-xl xl:text-2xl font-bold mt-1 leading-tight" style="color: var(--color-heading);"><?= $formatRupiahSingkat($totalPendapatanRupiah) ?></div>
                 </div>
                 <div class="icon-box">
                     <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h9a3 3 0 0 1 0 6H6z"/><path d="M6 13h10a3 3 0 0 1 0 6H6z"/><path d="M6 7v12"/></svg>
@@ -94,7 +114,7 @@ include __DIR__ . '/includes/header.php';
             <div class="flex items-start justify-between gap-3 min-w-0">
                 <div class="min-w-0">
                     <div class="text-sm font-semibold" style="color: var(--color-muted);">Akumulasi NCF</div>
-                    <div class="kpi-value font-bold mt-1 <?= $isLayak ? 'text-[#63C174]' : 'text-[#E46A61]' ?>"><?= format_usd_m($summary['total_ncf_setelah_investasi']) ?></div>
+                    <div class="text-lg sm:text-xl xl:text-2xl font-bold mt-1 leading-tight <?= $isLayak ? 'text-[#63C174]' : 'text-[#E46A61]' ?>"><?= format_usd_m($summary['total_ncf_setelah_investasi']) ?></div>
                 </div>
                 <div class="icon-box">
                     <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 7-7"/><path d="M14 8h6v6"/></svg>
@@ -103,13 +123,14 @@ include __DIR__ . '/includes/header.php';
         </div>
         <div class="p-5 rounded-[22px] sm:rounded-[24px] text-white relative overflow-hidden min-w-0" style="background: linear-gradient(135deg, #2F2A24, #7A5A1E); box-shadow: var(--shadow-card);">
             <div class="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-white/10"></div>
-            <div class="relative flex items-start justify-between gap-3 min-w-0">
-                <div class="min-w-0">
-                    <div class="text-sm font-semibold text-white/70">Kurs USD ke IDR</div>
-                    <div class="kpi-value font-bold mt-1 text-white">Rp<?= number_format($kurs, 0, ',', '.') ?></div>
+            <div class="relative min-w-0">
+                <div class="text-xs font-semibold uppercase tracking-wide text-white/65">Status Proyek</div>
+                <div class="mt-2 text-xl sm:text-2xl font-bold leading-tight text-white">
+                    <?= e($summary['status_kelayakan']) ?>
                 </div>
-                <div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                    <svg class="ui-icon text-white" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/><path d="M8 3c-2 3-2 15 0 18"/><path d="M16 3c2 3 2 15 0 18"/></svg>
+
+                <div class="mt-3 inline-flex items-center rounded-full px-3.5 py-1.5 text-sm font-bold" style="background: rgba(255, 210, 122, 0.16); color: #FFD27A; border: 1px solid rgba(255, 210, 122, 0.24);">
+                    Total NCF: <?= format_usd_m($summary['total_ncf_setelah_investasi']) ?>
                 </div>
             </div>
         </div>
@@ -206,20 +227,6 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 
-    <div class="rounded-[24px] sm:rounded-[28px] overflow-hidden relative" style="background: linear-gradient(135deg, #FFFDF8, #FFF3DA); border: 1px solid var(--color-accent-peach); box-shadow: 0 18px 45px rgba(214,170,94,.16);">
-        <div class="absolute -right-12 -top-12 w-40 h-40 rounded-full opacity-60" style="background: var(--color-primary-pale);"></div>
-        <div class="relative p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-            <div class="min-w-0">
-                <h3 class="font-bold text-xl sm:text-2xl tracking-tight" style="color: var(--color-heading);">Status Proyek: <?= e($summary['status_kelayakan']) ?></h3>
-                <p class="mt-2 text-sm sm:text-base leading-relaxed" style="color: var(--color-body);">Total NCF setelah investasi: <strong style="color: #7A5A1E;"><?= format_usd_m($summary['total_ncf_setelah_investasi']) ?></strong></p>
-            </div>
-            <div class="shrink-0 rounded-3xl px-5 py-4 text-center min-w-[220px]" style="background: <?= $statusBg ?>; color: <?= $statusColor ?>; border: 1px solid rgba(122,90,30,.14);">
-                <div class="text-xs font-bold uppercase tracking-wider opacity-80">Keputusan</div>
-                <div class="text-lg font-extrabold mt-1 leading-tight"><?= e($summary['status_kelayakan']) ?></div>
-                <div class="text-2xl font-extrabold mt-3 leading-tight"><?= format_usd_m($summary['total_ncf_setelah_investasi']) ?></div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>

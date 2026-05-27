@@ -219,7 +219,7 @@ if (!isset($activePage)) $activePage = 'dashboard';
 </head>
 <body class="antialiased">
 <div class="min-h-screen flex app-bg">
-    <aside class="hidden lg:flex lg:flex-col app-sidebar">
+    <aside class="hidden lg:flex lg:flex-col app-sidebar lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:overflow-y-auto">
         <div class="px-5 py-6 border-b" style="border-color: var(--color-divider);">
             <div class="flex items-center gap-3 min-w-0">
                 <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-white" style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)); box-shadow: 0 12px 24px rgba(245,166,35,.24);">
@@ -244,8 +244,8 @@ if (!isset($activePage)) $activePage = 'dashboard';
         <div class="p-4 text-xs border-t" style="color: var(--color-muted); border-color: var(--color-divider);">© 2026 Sistem Informasi Migas</div>
     </aside>
 
-    <main class="app-main">
-        <header class="app-topbar px-4 sm:px-6 lg:px-8 py-4 sticky top-0 z-10">
+    <main class="app-main lg:ml-[16.5rem] min-w-0"">
+        <header class="app-topbar px-4 sm:px-6 lg:px-8 py-4 fixed top-0 left-0 right-0 lg:left-[16.5rem] z-40">
             <div class="app-content flex flex-col gap-3">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 min-w-0">
                     <div class="min-w-0">
@@ -253,10 +253,6 @@ if (!isset($activePage)) $activePage = 'dashboard';
                         <p class="text-sm leading-relaxed" style="color: var(--color-muted);">Sistem pengelolaan proyek sumur, produksi, pendapatan, pajak, dan net cash flow.</p>
                     </div>
                     <div class="flex items-center gap-3 min-w-0">
-                        <input type="text" placeholder="Cari proyek..." class="hidden xl:block w-64 px-4 py-2 rounded-xl app-input">
-                        <button type="button" class="icon-box rounded-full" aria-label="Notifikasi">
-                            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                        </button>
                         <div class="w-10 h-10 rounded-full text-white flex items-center justify-center font-bold shrink-0" style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));">U</div>
                     </div>
                 </div>
@@ -272,4 +268,4 @@ if (!isset($activePage)) $activePage = 'dashboard';
                 </nav>
             </div>
         </header>
-        <section class="app-content p-4 sm:p-5 lg:p-7 xl:p-8 min-w-0">
+        <section class="app-content px-4 sm:px-5 lg:px-7 xl:px-8 pb-4 sm:pb-5 lg:pb-7 xl:pb-8 pt-36 sm:pt-32 lg:pt-28 min-w-0">
