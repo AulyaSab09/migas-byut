@@ -268,4 +268,4 @@ if (!isset($activePage)) $activePage = 'dashboard';
                 </nav>
             </div>
         </header>
-        <section class="app-content px-4 sm:px-5 lg:px-7 xl:px-8 pb-4 sm:pb-5 lg:pb-7 xl:pb-8 pt-36 sm:pt-32 lg:pt-28 min-w-0">
+        <section class="app-content px-4 sm:px-5 lg:px-7 xl:px-8 pb-4 sm:pb-5 lg:pb-7 xl:pb-8 pt-44 sm:pt-40 lg:pt-28 min-w-0">
