@@ -1,6 +1,4 @@
 <?php
-// Konfigurasi koneksi database
-// Sesuaikan username/password jika berbeda di XAMPP/Laragon.
 $host = 'localhost';
 $dbname = 'migas_db';
 $username = 'root';
